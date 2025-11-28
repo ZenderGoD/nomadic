@@ -49,6 +49,18 @@ export default function Home() {
     // Ensure we're on the client side
     if (typeof window === 'undefined') return
 
+    // Listen for navigation events to trigger lazy loading
+    const handleNavigateToSection = (e: CustomEvent) => {
+      const href = e.detail?.href
+      if (href === '#contact' && !shouldLoadContact) {
+        setShouldLoadContact(true)
+      } else if (href === '#portfolio' && !shouldLoadPortfolio) {
+        setShouldLoadPortfolio(true)
+      }
+    }
+
+    window.addEventListener('navigateToSection', handleNavigateToSection as EventListener)
+
     // Preload Portfolio early for better performance
     const preloadPortfolio = () => {
       if (!shouldLoadPortfolio) {
@@ -90,7 +102,10 @@ export default function Home() {
     preloadPortfolio()
     
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('navigateToSection', handleNavigateToSection as EventListener)
+    }
   }, [shouldLoadPortfolio, shouldLoadContact])
 
   if (!isMounted) {

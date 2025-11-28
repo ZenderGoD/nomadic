@@ -192,10 +192,28 @@ const PillNav: React.FC<PillNavProps> = ({
     const firstHref = items?.[0]?.href;
     if (firstHref?.startsWith('#')) {
       e.preventDefault();
-      const element = document.querySelector(firstHref);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      
+      // Dispatch custom event to trigger lazy loading if needed
+      window.dispatchEvent(new CustomEvent('navigateToSection', { 
+        detail: { href: firstHref } 
+      }));
+      
+      // Retry mechanism for lazy-loaded components
+      let retries = 0;
+      const maxRetries = 10; // Try for up to 2 seconds
+      
+      const scrollToElement = () => {
+        const element = document.querySelector(firstHref);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (retries < maxRetries) {
+          retries++;
+          setTimeout(scrollToElement, 200); // Retry every 200ms
+        }
+      };
+      
+      // Start trying after a small delay
+      setTimeout(scrollToElement, 100);
     }
   };
 
@@ -343,10 +361,28 @@ const PillNav: React.FC<PillNavProps> = ({
               const handleClick = (e: React.MouseEvent) => {
                 if (item.href.startsWith('#')) {
                   e.preventDefault();
-                  const element = document.querySelector(item.href);
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
+                  
+                  // Dispatch custom event to trigger lazy loading if needed
+                  window.dispatchEvent(new CustomEvent('navigateToSection', { 
+                    detail: { href: item.href } 
+                  }));
+                  
+                  // Retry mechanism for lazy-loaded components
+                  let retries = 0;
+                  const maxRetries = 10; // Try for up to 2 seconds
+                  
+                  const scrollToElement = () => {
+                    const element = document.querySelector(item.href);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (retries < maxRetries) {
+                      retries++;
+                      setTimeout(scrollToElement, 200); // Retry every 200ms
+                    }
+                  };
+                  
+                  // Start trying after a small delay
+                  setTimeout(scrollToElement, 100);
                 }
               };
 
