@@ -1,0 +1,18 @@
+.pill-nav {
+  position: relative;
+}
+
+.label-stack {
+  overflow: hidden;
+}
+
+.pill-label,
+.pill-label-hover {
+  display: inline-block;
+}
+
+.hover-circle {
+  position: absolute;
+  transform: translateX(-50%);
+}
+

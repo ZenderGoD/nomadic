@@ -1,0 +1,309 @@
+.pc-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --background-x: 50%;
+  --background-y: 50%;
+  --pointer-from-center: 0;
+  --pointer-from-top: 0.5;
+  --pointer-from-left: 0.5;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --icon: none;
+  --grain: none;
+  --inner-gradient: linear-gradient(145deg, #60496e8c 0%, #71c4ff44 100%);
+  --behind-glow-color: rgba(125, 190, 255, 0.67);
+  --behind-glow-size: 50%;
+}
+
+.pc-behind {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at var(--background-x) var(--background-y),
+    var(--behind-glow-color),
+    transparent var(--behind-glow-size)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pc-card-wrapper:has(.pc-card-shell.active) .pc-behind {
+  opacity: 1;
+}
+
+.pc-card-shell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+  transition: transform 0.1s ease-out;
+}
+
+.pc-card-shell.entering {
+  animation: enter 0.18s ease-out;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(0) rotateY(0) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) scale(1);
+  }
+}
+
+.pc-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.pc-inside {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--inner-gradient);
+  background-image: var(--icon), var(--grain);
+  background-size: cover, 200%;
+  background-position: center, var(--pointer-x) var(--pointer-y);
+  background-blend-mode: overlay, normal;
+}
+
+.pc-shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  opacity: calc(var(--pointer-from-center) * 0.5);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.pc-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  opacity: calc(1 - var(--pointer-from-center) * 0.5);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.pc-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pc-avatar-content {
+  align-items: center;
+  justify-content: center;
+}
+
+.pc-content .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+.pc-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pc-mini-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.pc-mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pc-user-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pc-handle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+}
+
+.pc-status {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pc-contact-btn {
+  padding: 0.75rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.pc-contact-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pc-contact-btn:active {
+  transform: translateY(0);
+}
+
+.pc-social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pc-social-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.pc-social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pc-social-link:active {
+  transform: translateY(0) scale(1);
+}
+
+.pc-details {
+  text-align: center;
+}
+
+.pc-details h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.pc-details p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  /* Disable all animations on mobile */
+  .pc-card-wrapper,
+  .pc-card-shell,
+  .pc-card,
+  .pc-inside,
+  .pc-shine,
+  .pc-glare,
+  .pc-content {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .pc-card-shell {
+    transform: none !important;
+  }
+  
+  .pc-card {
+    transform: none !important;
+  }
+  .pc-card-wrapper {
+    max-width: 100%;
+  }
+  
+  .pc-content {
+    padding: 1.5rem;
+  }
+  
+  .pc-content .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .pc-details h3 {
+    font-size: 1.25rem;
+  }
+  
+  .pc-details p {
+    font-size: 0.875rem;
+  }
+}
+
