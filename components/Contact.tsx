@@ -99,7 +99,7 @@ export default function Contact() {
                         setFormData({ ...formData, name: e.target.value })
                       }
                       required
-                      className="w-full bg-gray-900/50 border border-gray-800/50 rounded-sm px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-600/50 transition-colors font-light backdrop-blur-sm"
+                      className="w-full bg-gray-900/50 border border-gray-800/50 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-600/50 transition-colors font-light backdrop-blur-sm"
                     />
                   </div>
                   <div>
@@ -111,7 +111,7 @@ export default function Contact() {
                         setFormData({ ...formData, email: e.target.value })
                       }
                       required
-                      className="w-full bg-gray-900/50 border border-gray-800/50 rounded-sm px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-600/50 transition-colors font-light backdrop-blur-sm"
+                      className="w-full bg-gray-900/50 border border-gray-800/50 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-600/50 transition-colors font-light backdrop-blur-sm"
                     />
                   </div>
                   <div>
@@ -123,14 +123,14 @@ export default function Contact() {
                       }
                       required
                       rows={6}
-                      className="w-full bg-gray-900/50 border border-gray-800/50 rounded-sm px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-600/50 transition-colors font-light resize-none backdrop-blur-sm"
+                      className="w-full bg-gray-900/50 border border-gray-800/50 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-600/50 transition-colors font-light resize-none backdrop-blur-sm"
                     />
                   </div>
                   <motion.button
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-sm font-light tracking-wider uppercase flex items-center justify-center space-x-2 hover:bg-white/20 hover:border-white/30 transition-all"
+                    className="w-full bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-md font-light tracking-wider uppercase flex items-center justify-center space-x-2 hover:bg-white/20 hover:border-white/30 transition-all"
                   >
                     <span>Send Message</span>
                     <Send size={18} />

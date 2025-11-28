@@ -5,6 +5,21 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #999999;
+  --accent: #2a2a2a;
+  --accent-foreground: #ffffff;
+  --border: #333333;
+  --input: #333333;
+  --ring: #ffffff;
 }
 
 * {

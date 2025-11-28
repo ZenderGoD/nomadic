@@ -6,6 +6,7 @@ import { useRef, useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { X, Grid3x3, Sparkles } from 'lucide-react'
 import Masonry from './Masonry'
+import { Switch } from './ui/switch'
 
 // Lazy load InfiniteMenu only when creative view is selected
 const InfiniteMenu = dynamic(() => import('./InfiniteMenu'), {
@@ -118,29 +119,24 @@ export default function Portfolio() {
                 A selection of recent work
               </p>
             </div>
-            <div className="hidden md:flex items-center gap-2 border border-gray-800 rounded-sm p-1">
-              <button
-                onClick={() => setIsCreativeView(false)}
-                className={`px-4 py-2 rounded-sm font-light text-sm tracking-wider transition-all flex items-center gap-2 ${
-                  !isCreativeView
-                    ? 'bg-white text-black'
-                    : 'bg-transparent text-gray-400 hover:text-white'
-                }`}
-              >
-                <Grid3x3 size={16} />
-                <span>Normal</span>
-              </button>
-              <button
-                onClick={() => setIsCreativeView(true)}
-                className={`px-4 py-2 rounded-sm font-light text-sm tracking-wider transition-all flex items-center gap-2 ${
-                  isCreativeView
-                    ? 'bg-white text-black'
-                    : 'bg-transparent text-gray-400 hover:text-white'
-                }`}
-              >
-                <Sparkles size={16} />
-                <span>Creative</span>
-              </button>
+            <div className="hidden md:flex items-center gap-3 rounded-sm p-1 bg-black/20 backdrop-blur-sm">
+              <div className="flex items-center gap-2 px-3">
+                <Grid3x3 size={16} className={isCreativeView ? 'text-gray-400' : 'text-white'} />
+                <span className={`font-light text-sm tracking-wider transition-colors ${isCreativeView ? 'text-gray-400' : 'text-white'}`}>
+                  Normal
+                </span>
+              </div>
+              <Switch
+                checked={isCreativeView}
+                onCheckedChange={setIsCreativeView}
+                className="data-[state=checked]:bg-white data-[state=unchecked]:bg-gray-700"
+              />
+              <div className="flex items-center gap-2 px-3">
+                <Sparkles size={16} className={isCreativeView ? 'text-white' : 'text-gray-400'} />
+                <span className={`font-light text-sm tracking-wider transition-colors ${isCreativeView ? 'text-white' : 'text-gray-400'}`}>
+                  Creative
+                </span>
+              </div>
             </div>
           </div>
         </motion.div>

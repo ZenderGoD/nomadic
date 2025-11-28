@@ -61,7 +61,7 @@ export default function Footer() {
           <div className="text-center pt-4">
             <div className="flex justify-center text-white">
               <TrueFocus 
-                sentence="made by Bishal Banerjee for Prajjwal Vinod"
+                sentence="Made by Bishal Banerjee for Harsvardhan and Mohith Raju"
                 manualMode={false}
                 blurAmount={2}
                 borderColor="black"
