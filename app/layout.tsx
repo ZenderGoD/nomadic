@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Nomadic Studio',
+  title: {
+    default: 'Nomadic Studio',
+    template: '%s | Nomadic Studio',
+  },
   description: 'A portfolio showcasing cinematic work',
 }
 
