@@ -59,17 +59,7 @@ export default function Navigation({ isScrolled }: NavigationProps) {
           displace={isScrolled ? 2 : 0}
           className="transition-all duration-300"
         >
-          <div className="flex items-center justify-center h-full px-2 sm:px-3 md:px-6 gap-2 min-w-0 w-full">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-wider text-white uppercase"
-              style={{ fontFamily: 'Papyrus, "Apple Chancery", "Brush Script MT", cursive' }}
-            >
-              NOMADIC STUDIO
-            </motion.div>
-
+          <div className="flex items-center justify-center md:justify-between h-full px-2 sm:px-3 md:px-6 gap-2 min-w-0 w-full">
             <div className="hidden md:flex flex-shrink-0">
               <PillNav
                 items={navItems}
@@ -83,6 +73,16 @@ export default function Navigation({ isScrolled }: NavigationProps) {
                 logo={undefined}
               />
             </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl sm:text-2xl md:text-xl font-light tracking-wider text-white/80 md:text-white/70 uppercase flex-shrink-0 whitespace-nowrap"
+              style={{ fontFamily: 'Papyrus, "Apple Chancery", "Brush Script MT", cursive' }}
+            >
+              NOMADIC STUDIO
+            </motion.div>
           </div>
         </GlassSurface>
       </div>
