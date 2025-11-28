@@ -39,6 +39,11 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [shouldLoadPortfolio, setShouldLoadPortfolio] = useState(false)
   const [shouldLoadContact, setShouldLoadContact] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     // Ensure we're on the client side
@@ -87,6 +92,10 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [shouldLoadPortfolio, shouldLoadContact])
+
+  if (!isMounted) {
+    return null
+  }
 
   return (
     <main className="relative w-full overflow-x-hidden">
