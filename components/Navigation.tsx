@@ -20,6 +20,8 @@ export default function Navigation({ isScrolled }: NavigationProps) {
   const [activeHref, setActiveHref] = useState('#home')
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const handleScroll = () => {
       const sections = ['#home', '#about', '#portfolio', '#contact']
       const scrollPosition = window.scrollY + 100
