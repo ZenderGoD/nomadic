@@ -1,4 +1,4 @@
-# Cinematic Portfolio Website
+# Nomadic Studio Website
 
 A fast, elegant, and smooth portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 

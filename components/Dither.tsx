@@ -164,7 +164,8 @@ class RetroEffectImpl extends Effect {
     return this.uniforms.get('pixelSize')!.value;
   }
 
-  update(renderer: THREE.WebGLRenderer, inputBuffer: THREE.WebGLRenderTarget, deltaTime?: number) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update(renderer: THREE.WebGLRenderer, _inputBuffer: THREE.WebGLRenderTarget, _deltaTime?: number) {
     if (renderer) {
       const size = renderer.getSize(new THREE.Vector2());
       const resolutionUniform = this.uniforms.get('resolution');

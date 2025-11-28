@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 
 interface TrueFocusProps {
   sentence?: string;
@@ -12,20 +11,11 @@ interface TrueFocusProps {
   pauseBetweenAnimations?: number;
 }
 
-interface FocusRect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
 const TrueFocus: React.FC<TrueFocusProps> = ({
   sentence = 'True Focus',
   separator = ' ',
   manualMode = false,
   blurAmount = 5,
-  borderColor = 'green',
-  glowColor = 'rgba(0, 255, 0, 0.6)',
   animationDuration = 0.5,
   pauseBetweenAnimations = 1
 }) => {
@@ -34,7 +24,6 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
   const [lastActiveIndex, setLastActiveIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const [focusRect, setFocusRect] = useState<FocusRect>({ x: 0, y: 0, width: 0, height: 0 });
 
   useEffect(() => {
     if (!manualMode) {
@@ -52,16 +41,7 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
   useEffect(() => {
     if (currentIndex === null || currentIndex === -1) return;
     if (!wordRefs.current[currentIndex] || !containerRef.current) return;
-
-    const parentRect = containerRef.current.getBoundingClientRect();
-    const activeRect = wordRefs.current[currentIndex]!.getBoundingClientRect();
-
-    setFocusRect({
-      x: activeRect.left - parentRect.left,
-      y: activeRect.top - parentRect.top,
-      width: activeRect.width,
-      height: activeRect.height
-    });
+    // Focus rect calculation removed as it was unused
   }, [currentIndex, words.length]);
 
   const handleMouseEnter = (index: number) => {

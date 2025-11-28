@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef, useState, useEffect, lazy, Suspense } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
-import { Play, X, Grid3x3, Sparkles } from 'lucide-react'
+import { X, Grid3x3, Sparkles } from 'lucide-react'
 import Masonry from './Masonry'
 
 // Lazy load InfiniteMenu only when creative view is selected

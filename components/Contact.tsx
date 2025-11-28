@@ -47,7 +47,7 @@ export default function Contact() {
             Get In Touch
           </h2>
           <p className="text-gray-400 font-light text-sm sm:text-base md:text-lg">
-            Let's create something extraordinary together
+            Let&apos;s create something extraordinary together
           </p>
         </motion.div>
 
@@ -85,7 +85,7 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle className="text-white font-light text-xl">Send a Message</CardTitle>
                 <CardDescription className="text-gray-400 font-light">
-                  Fill out the form below and we'll get back to you
+                  Fill out the form below and we&apos;ll get back to you
                 </CardDescription>
               </CardHeader>
               <CardContent>
