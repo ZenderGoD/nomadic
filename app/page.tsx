@@ -41,6 +41,9 @@ export default function Home() {
   const [shouldLoadContact, setShouldLoadContact] = useState(false)
 
   useEffect(() => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return
+
     // Preload Portfolio early for better performance
     const preloadPortfolio = () => {
       if (!shouldLoadPortfolio) {
