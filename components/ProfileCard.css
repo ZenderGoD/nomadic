@@ -1,7 +1,7 @@
 .pc-card-wrapper {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 100%;
   margin: 0 auto;
   --pointer-x: 50%;
   --pointer-y: 50%;

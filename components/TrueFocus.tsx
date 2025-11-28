@@ -83,7 +83,8 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
                     : `blur(${blurAmount}px)`,
                 transition: `filter ${animationDuration}s ease`,
                 outline: 'none',
-                userSelect: 'none'
+                userSelect: 'none',
+                fontFamily: 'Papyrus, "Apple Chancery", "Brush Script MT", cursive'
               } as React.CSSProperties
             }
             onMouseEnter={() => handleMouseEnter(index)}
