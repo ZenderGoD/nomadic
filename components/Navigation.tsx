@@ -66,7 +66,7 @@ export default function Navigation({ isScrolled }: NavigationProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-sm sm:text-base md:text-sm font-light tracking-wider text-white/80 md:text-white/70 uppercase flex-shrink-0 whitespace-nowrap"
+              className="text-base sm:text-lg md:text-xl font-light tracking-wider text-white md:text-white uppercase flex-shrink-0 whitespace-nowrap"
               style={{ fontFamily: 'Papyrus, "Apple Chancery", "Brush Script MT", cursive' }}
             >
               NOMADIC STUDIO
