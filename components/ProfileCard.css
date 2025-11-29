@@ -318,6 +318,8 @@
   }
   .pc-card-wrapper {
     max-width: 100%;
+    min-width: 280px;
+    flex-shrink: 0;
   }
   
   .pc-content {

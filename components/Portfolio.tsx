@@ -110,6 +110,7 @@ export default function Portfolio() {
   const [isLiked, setIsLiked] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [isMobile, setIsMobile] = useState(false)
   const itemsPerPage = 6
   const previewRef = useRef<HTMLDivElement>(null)
   const isScrolling = useRef(false)
@@ -145,10 +146,12 @@ export default function Portfolio() {
     }, 400)
   }, [])
   
-  // Force normal view on mobile
+  // Force normal view on mobile and detect mobile for pagination
   useEffect(() => {
     const checkMobile = () => {
-      if (window.innerWidth < 768) {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      if (mobile) {
         setIsCreativeView(false)
       }
     }
@@ -309,10 +312,10 @@ export default function Portfolio() {
     }
   }, [selectedProject, navigate])
 
-  // Pagination calculations
+  // Pagination calculations - only paginate on mobile, show all on desktop
   const totalPages = Math.ceil(projects.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
+  const startIndex = isMobile ? (currentPage - 1) * itemsPerPage : 0
+  const endIndex = isMobile ? startIndex + itemsPerPage : projects.length
   const paginatedProjects = projects.slice(startIndex, endIndex)
 
   // Convert projects to InfiniteMenu format (all projects for creative view)
@@ -403,13 +406,13 @@ export default function Portfolio() {
               onItemClick={(id) => setSelectedProject(parseInt(id))}
             />
             
-            {/* Pagination Controls */}
-            {totalPages > 1 && (
+            {/* Pagination Controls - Only show on mobile */}
+            {isMobile && totalPages > 1 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex items-center justify-center gap-4 mt-12"
+                className="flex items-center justify-center gap-4 mt-12 md:hidden"
               >
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
