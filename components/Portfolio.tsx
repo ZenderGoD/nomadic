@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect, useCallback, Suspense } from 'react'
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
-import { X, Grid3x3, Sparkles, ChevronUp, ChevronDown, Heart, MessageCircle, Share2 } from 'lucide-react'
+import { X, Grid3x3, Sparkles, ChevronUp, ChevronDown, Heart, MessageCircle, Share2, ChevronLeft, ChevronRight } from 'lucide-react'
 import Masonry from './Masonry'
 import { Switch } from './ui/switch'
 import { ProgressiveBlur } from './ui/progressive-blur'
@@ -109,6 +109,8 @@ export default function Portfolio() {
   const [isCreativeView, setIsCreativeView] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6
   const previewRef = useRef<HTMLDivElement>(null)
   const isScrolling = useRef(false)
   const wheelTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -307,7 +309,13 @@ export default function Portfolio() {
     }
   }, [selectedProject, navigate])
 
-  // Convert projects to InfiniteMenu format
+  // Pagination calculations
+  const totalPages = Math.ceil(projects.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedProjects = projects.slice(startIndex, endIndex)
+
+  // Convert projects to InfiniteMenu format (all projects for creative view)
   const menuItems = projects.map(project => ({
     image: project.image,
     link: `#project-${project.id}`,
@@ -315,12 +323,12 @@ export default function Portfolio() {
     description: project.description || project.category,
   }))
 
-  // Convert projects to Masonry format with varied heights
-  const masonryItems = projects.map((project, index) => ({
+  // Convert paginated projects to Masonry format with varied heights
+  const masonryItems = paginatedProjects.map((project, index) => ({
     id: project.id.toString(),
     img: project.image,
     url: `#project-${project.id}`,
-    height: [400, 300, 500, 350, 450, 320, 380, 420, 360, 440, 340][index % 11], // Varied heights for masonry effect
+    height: [400, 300, 500, 350, 450, 320, 380, 420, 360, 440, 340][(startIndex + index) % 11], // Varied heights for masonry effect
   }))
 
   return (
@@ -354,7 +362,10 @@ export default function Portfolio() {
               </div>
               <Switch
                 checked={isCreativeView}
-                onCheckedChange={setIsCreativeView}
+                onCheckedChange={(checked) => {
+                  setIsCreativeView(checked)
+                  setCurrentPage(1) // Reset to first page when switching views
+                }}
                 className="data-[state=checked]:bg-[#fbbf24] data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600"
               />
               <div className="flex items-center gap-2 px-3">
@@ -389,12 +400,66 @@ export default function Portfolio() {
               hoverScale={0.95}
               blurToFocus={true}
               colorShiftOnHover={false}
-              enableTilt={true}
-              enableMagnetism={false}
-              clickEffect={true}
-              glowColor="132, 0, 255"
               onItemClick={(id) => setSelectedProject(parseInt(id))}
             />
+            
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex items-center justify-center gap-4 mt-12"
+              >
+                <button
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="flex items-center justify-center w-10 h-10 rounded-full border transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary"
+                  style={{
+                    borderColor: theme === 'light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+                    color: theme === 'light' ? '#000000' : '#ffffff',
+                  }}
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 rounded-full transition-all font-light text-sm ${
+                        currentPage === page
+                          ? 'bg-[#fbbf24] text-black'
+                          : 'hover:bg-secondary'
+                      }`}
+                      style={{
+                        color: currentPage === page
+                          ? '#000000'
+                          : theme === 'light' ? '#000000' : '#ffffff',
+                      }}
+                      aria-label={`Go to page ${page}`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+                
+                <button
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  className="flex items-center justify-center w-10 h-10 rounded-full border transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-secondary"
+                  style={{
+                    borderColor: theme === 'light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+                    color: theme === 'light' ? '#000000' : '#ffffff',
+                  }}
+                  aria-label="Next page"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </motion.div>
+            )}
           </div>
         )}
       </div>
