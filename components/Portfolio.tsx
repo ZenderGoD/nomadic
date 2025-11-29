@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import { X, Grid3x3, Sparkles, ChevronUp, ChevronDown, Heart, MessageCircle, Share2 } from 'lucide-react'
 import Masonry from './Masonry'
 import { Switch } from './ui/switch'
+import { ProgressiveBlur } from './ui/progressive-blur'
 
 // Lazy load InfiniteMenu only when creative view is selected
 const InfiniteMenu = dynamic(() => import('./InfiniteMenu'), {
@@ -579,6 +580,11 @@ export default function Portfolio() {
           </motion.div>
         </motion.div>
       )}
+
+      {/* Progressive Blur at bottom */}
+      <div className="absolute inset-x-0 bottom-0 z-10">
+        <ProgressiveBlur height="20%" position="bottom" blurLevels={[0.5, 1, 2, 4, 8]} />
+      </div>
     </section>
   )
 }

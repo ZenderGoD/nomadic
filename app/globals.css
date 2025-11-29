@@ -136,6 +136,30 @@ body {
   }
 }
 
+/* Shine Border Animation */
+@theme inline {
+  --animate-shine: shine var(--duration) infinite linear;
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
+  }
+}
+
+/* View Transition for Theme Toggler */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 /* Mobile optimizations */
 @media (max-width: 640px) {
   /* Reduce motion on mobile for better performance */

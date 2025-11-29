@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { Instagram, Youtube } from 'lucide-react';
+import { ShineBorder } from './ui/shine-border';
 import './ProfileCard.css';
 
 interface ProfileCardProps {
@@ -336,7 +337,13 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   return (
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()} style={cardStyle}>
       {behindGlowEnabled && <div className="pc-behind" />}
-      <div ref={shellRef} className="pc-card-shell">
+      <div ref={shellRef} className="pc-card-shell relative">
+        <ShineBorder 
+          borderWidth={2} 
+          duration={14} 
+          shineColor={["#fbbf24", "#fde047", "#fbbf24"]}
+          style={{ borderRadius: '16px' }}
+        />
         <section className="pc-card">
           <div className="pc-inside">
             <div className="pc-shine" />

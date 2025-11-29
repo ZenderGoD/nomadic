@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import GlassSurface from './GlassSurface'
 import PillNav from './PillNav'
-import { ModeToggle } from './mode-toggle'
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
 
 interface NavigationProps {
   isScrolled: boolean
@@ -77,10 +77,10 @@ export default function Navigation({ isScrolled }: NavigationProps) {
           initialLoadAnimation={false}
           logo={undefined}
         />
-        <ModeToggle />
+        <AnimatedThemeToggler />
       </div>
       <div className="md:hidden flex-shrink-0">
-        <ModeToggle />
+        <AnimatedThemeToggler />
       </div>
     </div>
   )

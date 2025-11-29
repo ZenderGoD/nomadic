@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
+import { ProgressiveBlur } from './ui/progressive-blur'
 
 // Lazy load Dither component (WebGL heavy)
 const Dither = dynamic(() => import('./Dither'), {
@@ -23,7 +24,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[60vh] md:min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Dither Background */}
       <div className="absolute inset-0 z-0">
@@ -89,6 +90,11 @@ export default function Hero() {
             <ArrowDown size={18} />
           </motion.div>
         </motion.button>
+      </div>
+
+      {/* Progressive Blur at bottom */}
+      <div className="absolute inset-x-0 bottom-0 z-10">
+        <ProgressiveBlur height="20%" position="bottom" blurLevels={[0.5, 1, 2, 4, 8]} />
       </div>
     </section>
   )

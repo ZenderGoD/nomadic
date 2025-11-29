@@ -19,7 +19,7 @@ export function ModeToggle() {
         className="inline-flex items-center justify-center rounded-md p-2 hover:bg-secondary transition-colors"
         aria-label="Toggle theme"
       >
-        <Sun className="h-5 w-5 text-foreground" />
+        <Sun className="h-5 w-5" style={{ color: '#fbbf24' }} />
       </button>
     )
   }
@@ -31,9 +31,9 @@ export function ModeToggle() {
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (
-        <Sun className="h-5 w-5" style={{ color: '#ffffff' }} />
+        <Sun className="h-5 w-5" style={{ color: '#fbbf24' }} />
       ) : (
-        <Moon className="h-5 w-5" style={{ color: '#000000' }} />
+        <Moon className="h-5 w-5" style={{ color: '#fbbf24' }} />
       )}
     </button>
   )

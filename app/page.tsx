@@ -6,6 +6,7 @@ import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import Showreel from '@/components/Showreel'
 
 // Lazy load heavy components with priority for Portfolio
 const Portfolio = dynamic(() => import('@/components/Portfolio'), {
@@ -115,27 +116,30 @@ export default function Home() {
   return (
     <main className="relative w-full overflow-x-hidden">
       <Navigation isScrolled={isScrolled} />
-      <Hero />
-      <About />
-      {shouldLoadPortfolio && (
-        <Suspense fallback={
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="animate-pulse text-black dark:text-white">Loading portfolio...</div>
-          </div>
-        }>
-          <Portfolio />
-        </Suspense>
-      )}
-      {shouldLoadContact && (
-        <Suspense fallback={
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="animate-pulse text-black dark:text-white">Loading contact...</div>
-          </div>
-        }>
-          <Contact />
-        </Suspense>
-      )}
-      <Footer />
+      <div className="relative">
+        <Hero />
+        <Showreel />
+        <About />
+        {shouldLoadPortfolio && (
+          <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="animate-pulse text-black dark:text-white">Loading portfolio...</div>
+            </div>
+          }>
+            <Portfolio />
+          </Suspense>
+        )}
+        {shouldLoadContact && (
+          <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="animate-pulse text-black dark:text-white">Loading contact...</div>
+            </div>
+          }>
+            <Contact />
+          </Suspense>
+        )}
+        <Footer />
+      </div>
     </main>
   )
 }

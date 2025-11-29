@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useTheme } from 'next-themes'
+import { ProgressiveBlur } from './ui/progressive-blur'
 
 export default function About() {
   const ref = useRef(null)
@@ -14,7 +15,7 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="min-h-screen flex items-center py-20 px-4 sm:px-6 lg:px-8 bg-background"
+      className="relative min-h-screen flex items-center py-20 px-4 sm:px-6 lg:px-8 bg-background"
     >
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-20 items-center">
@@ -45,10 +46,14 @@ export default function About() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative aspect-[4/3] bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900 rounded-sm overflow-hidden"
+            className="relative aspect-[4/3] rounded-sm overflow-hidden"
           >
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80')] bg-cover bg-center opacity-60" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/50 dark:from-black/50 to-transparent" />
+            <img
+              src="/Inaugural Dinner.jpg"
+              alt="Inaugural Dinner"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </motion.div>
         </div>
 
@@ -81,6 +86,11 @@ export default function About() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Progressive Blur at bottom */}
+      <div className="absolute inset-x-0 bottom-0 z-10">
+        <ProgressiveBlur height="20%" position="bottom" blurLevels={[0.5, 1, 2, 4, 8]} />
       </div>
     </section>
   )
