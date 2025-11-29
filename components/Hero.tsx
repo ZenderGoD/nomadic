@@ -2,17 +2,19 @@
 
 import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 
 // Lazy load Dither component (WebGL heavy)
 const Dither = dynamic(() => import('./Dither'), {
   loading: () => (
-    <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />
+    <div className="absolute inset-0 bg-background" />
   ),
   ssr: false,
 })
 
 export default function Hero() {
+  const { theme } = useTheme()
   const scrollToNext = () => {
     const element = document.querySelector('#about')
     element?.scrollIntoView({ behavior: 'smooth' })
@@ -26,16 +28,20 @@ export default function Hero() {
       {/* Dither Background */}
       <div className="absolute inset-0 z-0">
         <Dither
-          waveColor={[0.5, 0.5, 0.5]}
+          baseColor={theme === 'light' ? [0.996, 0.953, 0.780] : [0.0, 0.0, 0.0]}
+          waveColor={theme === 'light' ? [0.984, 0.749, 0.141] : [0.25, 0.25, 0.25]}
           disableAnimation={false}
           enableMouseInteraction={true}
           mouseRadius={0.3}
           colorNum={4}
-          waveAmplitude={0.3}
-          waveFrequency={3}
-          waveSpeed={0.05}
+          waveAmplitude={0.2}
+          waveFrequency={2.5}
+          waveSpeed={0.03}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        {/* Top fade overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/40 to-transparent" />
+        {/* Bottom fade overlay - smooth transition to next section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
       </div>
 
       {/* Content */}
@@ -51,8 +57,8 @@ export default function Hero() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight mb-4 sm:mb-6"
           >
-            <span className="block">CINEMATIC</span>
-            <span className="block text-gray-400">STORYTELLING</span>
+            <span className="block text-[#fbbf24] dark:text-white" style={{ color: '#fbbf24' }}>CINEMATIC</span>
+            <span className="block text-[#fbbf24] dark:text-white/70" style={{ color: '#fbbf24' }}>STORYTELLING</span>
           </motion.h1>
         </motion.div>
 
@@ -60,7 +66,8 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-base sm:text-lg md:text-xl text-gray-300 font-light tracking-wider max-w-2xl mx-auto mb-8 sm:mb-12 px-4"
+          className="text-base sm:text-lg md:text-xl font-light tracking-wider max-w-2xl mx-auto mb-8 sm:mb-12 px-4"
+          style={{ color: theme === 'light' ? '#000000' : '#ffffff' }}
         >
           Capturing moments that transcend time
         </motion.p>
@@ -70,31 +77,19 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}
           onClick={scrollToNext}
-          className="group flex items-center justify-center mx-auto text-sm font-light tracking-widest uppercase hover:text-gray-300 transition-colors"
+          className="group flex items-center justify-center mx-auto text-sm font-light tracking-widest uppercase hover:text-[#fbbf24] dark:hover:text-white transition-colors"
+          style={{ color: theme === 'light' ? '#000000' : '#ffffff' }}
         >
           <span className="mr-2">Explore</span>
           <motion.div
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
+            style={{ color: theme === 'light' ? '#000000' : '#ffffff' }}
           >
             <ArrowDown size={18} />
           </motion.div>
         </motion.button>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-px h-12 bg-white/30"
-        />
-      </motion.div>
     </section>
   )
 }

@@ -1,4 +1,4 @@
-# Nomadic Studio Website
+# Nomadic Productions Website
 
 A fast, elegant, and smooth portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 

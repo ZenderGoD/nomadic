@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 export type LogoItem =
   | {
@@ -200,6 +201,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     className,
     style
   }) => {
+    const { theme } = useTheme();
     const containerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const seqRef = useRef<HTMLUListElement>(null);
@@ -264,9 +266,12 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         ({
           '--logoloop-gap': `${gap}px`,
           '--logoloop-logoHeight': `${logoHeight}px`,
-          ...(fadeOutColor && { '--logoloop-fadeColor': fadeOutColor })
+          ...(fadeOutColor && { '--logoloop-fadeColor': fadeOutColor }),
+          ...(!fadeOutColor && {
+            '--logoloop-fadeColorAuto': theme === 'dark' ? '#0b0b0b' : '#ffffff'
+          })
         }) as React.CSSProperties,
-      [gap, logoHeight, fadeOutColor]
+      [gap, logoHeight, fadeOutColor, theme]
     );
 
     const rootClasses = useMemo(
@@ -276,8 +281,6 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           isVertical ? 'overflow-hidden h-full inline-block' : 'overflow-x-hidden',
           '[--logoloop-gap:32px]',
           '[--logoloop-logoHeight:28px]',
-          '[--logoloop-fadeColorAuto:#ffffff]',
-          'dark:[--logoloop-fadeColorAuto:#0b0b0b]',
           scaleOnHover && 'py-[calc(var(--logoloop-logoHeight)*0.1)]',
           className
         ),

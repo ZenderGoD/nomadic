@@ -9,6 +9,7 @@ interface TrueFocusProps {
   glowColor?: string;
   animationDuration?: number;
   pauseBetweenAnimations?: number;
+  textColor?: string;
 }
 
 const TrueFocus: React.FC<TrueFocusProps> = ({
@@ -17,7 +18,8 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
   manualMode = false,
   blurAmount = 5,
   animationDuration = 0.5,
-  pauseBetweenAnimations = 1
+  pauseBetweenAnimations = 1,
+  textColor = '#ffffff'
 }) => {
   const words = sentence.split(separator);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -71,9 +73,10 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
             ref={el => {
               wordRefs.current[index] = el;
             }}
-            className="relative text-[10px] font-black cursor-pointer text-white"
+            className="relative text-[10px] font-black cursor-pointer"
             style={
               {
+                color: textColor,
                 filter: manualMode
                   ? isActive
                     ? `blur(0px)`

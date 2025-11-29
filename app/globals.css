@@ -3,14 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #fbbf24;
+  --primary-foreground: #1a1a1a;
+  --secondary: #fef3c7;
+  --secondary-foreground: #1a1a1a;
+  --muted: #fef3c7;
+  --muted-foreground: #78716c;
+  --accent: #fde047;
+  --accent-foreground: #1a1a1a;
+  --border: #eab308;
+  --input: #fef3c7;
+  --ring: #fbbf24;
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #fbbf24;
+  --primary-foreground: #1a1a1a;
+  --secondary: #fef3c7;
+  --secondary-foreground: #1a1a1a;
+  --muted: #fef3c7;
+  --muted-foreground: #78716c;
+  --accent: #fde047;
+  --accent-foreground: #1a1a1a;
+  --border: #eab308;
+  --input: #fef3c7;
+  --ring: #fbbf24;
+}
+
+.dark {
+  --background: #000000;
   --foreground: #ffffff;
   --card: #0a0a0a;
   --card-foreground: #ffffff;
   --popover: #1a1a1a;
   --popover-foreground: #ffffff;
   --primary: #ffffff;
-  --primary-foreground: #0a0a0a;
+  --primary-foreground: #000000;
   --secondary: #1a1a1a;
   --secondary-foreground: #ffffff;
   --muted: #1a1a1a;
@@ -55,16 +95,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--muted-foreground);
 }
 
 /* Custom animations */

@@ -12,8 +12,8 @@ const Portfolio = dynamic(() => import('@/components/Portfolio'), {
   loading: () => (
     <div className="min-h-screen flex items-center justify-center py-20">
       <div className="text-center">
-        <div className="animate-pulse text-gray-400 mb-2">Loading portfolio...</div>
-        <div className="w-48 h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
+        <div className="animate-pulse text-black dark:text-white mb-2">Loading portfolio...</div>
+        <div className="w-48 h-1 bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden mx-auto">
           <div className="h-full bg-white/20 animate-[loading_1.5s_ease-in-out_infinite]" />
         </div>
       </div>
@@ -26,8 +26,8 @@ const Contact = dynamic(() => import('@/components/Contact'), {
   loading: () => (
     <div className="min-h-screen flex items-center justify-center py-20">
       <div className="text-center">
-        <div className="animate-pulse text-gray-400 mb-2">Loading contact...</div>
-        <div className="w-48 h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
+        <div className="animate-pulse text-black dark:text-white mb-2">Loading contact...</div>
+        <div className="w-48 h-1 bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden mx-auto">
           <div className="h-full bg-white/20 animate-[loading_1.5s_ease-in-out_infinite]" />
         </div>
       </div>
@@ -120,20 +120,16 @@ export default function Home() {
       {shouldLoadPortfolio && (
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center">
-            <div className="animate-pulse text-gray-400">Loading portfolio...</div>
+            <div className="animate-pulse text-black dark:text-white">Loading portfolio...</div>
           </div>
         }>
           <Portfolio />
         </Suspense>
       )}
-      {/* Smooth transition gradient between Portfolio and Contact */}
-      {shouldLoadContact && (
-        <div className="h-32 bg-gradient-to-b from-black via-gray-950 to-black" />
-      )}
       {shouldLoadContact && (
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center">
-            <div className="animate-pulse text-gray-400">Loading contact...</div>
+            <div className="animate-pulse text-black dark:text-white">Loading contact...</div>
           </div>
         }>
           <Contact />

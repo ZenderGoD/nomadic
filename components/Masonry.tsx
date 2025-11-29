@@ -125,7 +125,12 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
+    // Set images ready immediately to allow rendering, images will load progressively
+    setImagesReady(true);
+    // Optionally preload in background without blocking
+    preloadImages(items.map(i => i.img)).catch(() => {
+      // Silently fail - images will still load when rendered
+    });
   }, [items]);
 
   const grid = useMemo<GridItem[]>(() => {
@@ -352,9 +357,21 @@ const Masonry: React.FC<MasonryProps> = ({
           onMouseMove={(e) => handleMouseMove(item.id, e.currentTarget, e)}
         >
           <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] overflow-hidden"
-            style={{ backgroundImage: `url(${item.img})` }}
+            className="relative w-full h-full rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] overflow-hidden"
           >
+            <img
+              src={item.img}
+              alt=""
+              className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+              onError={() => {
+                console.error('Failed to load image:', item.img);
+              }}
+              onLoad={() => {
+                // Ensure GIFs start animating when loaded
+              }}
+            />
             {colorShiftOnHover && (
               <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none transition-opacity duration-300" />
             )}
