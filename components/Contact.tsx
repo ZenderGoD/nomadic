@@ -20,8 +20,8 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="flex sm:grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-6 items-start md:items-center w-full overflow-x-auto sm:overflow-x-visible pb-4 sm:pb-0 scrollbar-hide">
-          <div className="flex justify-center flex-shrink-0 w-[280px] sm:w-full">
+        <div className="flex sm:grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-6 items-center w-full overflow-x-auto sm:overflow-x-visible overflow-y-hidden pb-4 sm:pb-0 scrollbar-hide">
+          <div className="flex justify-center items-center flex-shrink-0 w-[280px] sm:w-full">
             <ProfileCard
               name="Nomadic Productions"
               title="Cinematic Storyteller"
@@ -40,7 +40,7 @@ export default function Contact() {
             />
           </div>
 
-          <div className="flex justify-center flex-shrink-0 w-[280px] sm:w-full">
+          <div className="flex justify-center items-center flex-shrink-0 w-[280px] sm:w-full">
             <ProfileCard
               name="Harsvardhan"
               title="Cinematic Storyteller"
@@ -59,7 +59,7 @@ export default function Contact() {
             />
           </div>
 
-          <div className="flex justify-center flex-shrink-0 w-[280px] sm:w-full">
+          <div className="flex justify-center items-center flex-shrink-0 w-[280px] sm:w-full">
             <ProfileCard
               name="Mohith Raju"
               title="Cinematic Storyteller"
@@ -78,7 +78,7 @@ export default function Contact() {
             />
           </div>
 
-          <div className="flex justify-center flex-shrink-0 w-[280px] sm:w-full">
+          <div className="flex justify-center items-center flex-shrink-0 w-[280px] sm:w-full">
             <ProfileCard
               name="Gokul Krishna"
               title="Cinematic Storyteller"
