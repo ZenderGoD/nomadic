@@ -127,18 +127,12 @@ export default function Navigation({ isScrolled }: NavigationProps) {
                 className="absolute inset-0"
               >
                 <motion.div
-                  initial={{ borderRadius: 0 }}
-                  animate={{ borderRadius: 16 }}
-                  transition={{
-                    duration: 0.5,
-                    ease: [0.4, 0, 0.2, 1],
-                  }}
                   className="h-full"
                 >
                   <GlassSurface
                     width="100%"
                     height={64}
-                    borderRadius={16}
+                    borderRadius={0}
                     brightness={40}
                     opacity={0.85}
                     blur={15}
